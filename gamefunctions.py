@@ -1,6 +1,28 @@
+"""Game Functions Module.
+
+This module contains functions relating to gameplay technicalities."""
+
+
 import random
 
 def purchase_item(itemPrice, startingMoney, quantityToPurchase):
+
+    """
+    Purchases an item for a Player
+
+    Parameters:
+    itemPrice (float): Price of an individual item
+    startingMoney (float): Player Bank Account
+    quantityToPurchase (int): Number of items player wishes to buy
+
+    Returns:
+    items bought and leftover money
+
+    Example:
+        purchase_item(2, 200, 10)
+        2, 180
+    """
+    
     #qtp default value
     if quantityToPurchase <= 0:
         quantityToPurchase = 0
@@ -22,6 +44,19 @@ def purchase_item(itemPrice, startingMoney, quantityToPurchase):
 # DIVIDER
 
 def new_random_monster():
+
+    """
+    Generates  a random monster for the player
+
+    Parameters:
+    None
+
+    Returns:
+    Dictionary of the monsters stats.
+
+    Example:
+        new_random_monster()
+    """
 
     # determines monster selection
     monster = (random.randint(1,4))
@@ -56,6 +91,21 @@ def new_random_monster():
     return monsterdict
 
 def print_welcome(name, width):
+
+    """
+    Welcomes the player to the game
+
+    Parameters:
+    name (str): Player name
+    Width (int): number of characters allowed
+
+    Returns:
+    Welcome, Player name between a set amount of spaces/characters
+
+    Example:
+        print_welcome(Jeff, 15)
+              Welcome, Jeff      
+    """
     
     # These 4 lines do some math (probably ineffeciently) to find how many spaces need to come before and after the name
     strlngth = len(name)+7
@@ -72,6 +122,23 @@ print(print_welcome("Audrey", 30))
 print(print_welcome("Andrew", 55))
 
 def print_shop_menu(item1name, item1price, item2name, item2price):
+
+    """
+    Generates  a menu for a shop
+
+    Parameters:
+    item1name (str): Name of item1
+    item1Price (float): cost of item1
+    item2name (str): Name of item2
+    item2Price (float): cost of item2
+
+    Returns:
+    None
+
+    Example:
+        print_shop_menu(Food, 2, Drink, 3)
+        Outputs formatted menu
+    """
     # Converts prices to Floats
     item1 = float(item1price)
     item2 = float(item2price)
@@ -94,3 +161,29 @@ def print_shop_menu(item1name, item1price, item2name, item2price):
 print(print_shop_menu("Apple", 31, "Pear", 1.234))
 print(print_shop_menu("Egg", .23, "Bag of Oats", 12.34))
 print(print_shop_menu("Sword", 4000, "Ham", 22.25))
+
+def test_functions():
+    
+    """
+    Tests all above code
+
+    Parameters:
+    None
+
+    Returns:
+    None
+
+    Example:
+        test_functions()
+    """
+
+    #Each Test run
+    print_welcome("Jeff", 20)
+    print_shop_menu("Sword", 4000, "Ham", 22.25)
+    purchase_item(Potion, 10, 50)
+    random_monster()
+
+    return None
+
+if __name__ == "__main__":
+    test_functions()
