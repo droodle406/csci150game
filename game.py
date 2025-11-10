@@ -1,23 +1,34 @@
 import gamefunctions
 
-def main():
-    """Main game function to demonstrate gamefunctions usage."""
-    name = input("Enter your name, hero: ")
-    cash = float(input("How much gold do you have?"))
-    
-    
-    gamefunctions.print_welcome(name, 30)
-    gamefunctions.print_shop_menu("Sword", 4000, "Ham", 22.25)
-    
-    filler = input("What would you like to purchase?")
-    num = float(input("How many of that would you like to purchase?"))
-    price = float(input("What is the cost on the menu?"))
-    gamefunctions.purchase_item(price, cash, num)
+playerhp = 300
+gold = 50
+playerdamage = 25
 
-    gamefunctions.new_random_monster()
-    print("A monster approaches!")
-    # To be fleshed out later
+def loop():
+    """Main game loop to start off with."""
+    global playerhp, gold, playerdamage
     
+    user_input = input(f"You are in town.\n Current HP: {playerhp}, Current Gold: {gold}\nWhat would you like to do?\n1) Leave town (Fight Monster)\n2) Sleep (Restore HP for 5 gold)\n3) Quit")
+
+    if user_input == "1":
+        playerhp, gold = gamefunctions.battle(playerhp, gold, playerdamage)
+
+    if user_input == "2":
+        print(f"You sleep at the local tavern. \n-5 Gold")
+        gold -= 5
+        playerhp += 20
+        loop()
+
+    if user_input == "3":
+        print(f"Thank you for playing, have a good day.")
+
+    else:
+        print("Invalid Input, Try again.")
+        loop()
 
 if __name__ == "__main__":
-    main()
+    loop()
+
+    
+    
+

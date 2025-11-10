@@ -185,5 +185,35 @@ def test_functions():
 
     return None
 
+def battle(playerhp, gold, playerdamage):
+    monster_info = new_random_monster()
+    
+    while playerhp > 0 and monster_info["health"] > 0:
+        print(f"{monster_info['description']}\nThe {monster_info['name']} has {monster_info['health']} health and does {monster_info['power']} damage.")
+        print(f"You do {playerdamage} damage and you have {playerhp} health.")
+        
+        user_action = input("What would you like to do? \n1) Fight \n2) Run\n")
+        
+        if user_action == "1":
+            monster_info["health"] -= playerdamage
+            playerhp -= monster_info["power"]
+        elif user_action == "2":
+            print("You ran away.")
+            return playerhp, gold  # returns current stats to main
+        else:
+            print("Unrecognized command")
+        
+        if playerhp <= 0:
+            print("Your character passed out.")
+            return playerhp, gold
+        elif monster_info["health"] <= 0:
+            print(f"Congratulations! You have defeated the {monster_info['name']}!")
+            gold += 3
+            return playerhp, gold
+
+    return playerhp, gold
+
 if __name__ == "__main__":
     test_functions()
+
+    
