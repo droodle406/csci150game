@@ -3,15 +3,19 @@ import gamefunctions
 playerhp = 300
 gold = 50
 playerdamage = 25
+player_inventory =  [
+                     {"name": "Charm of Home", "desc": "A charm given to you by your mother before leaving as a good luck token, has no effects.", "type": "trinket"},
+                    ]
+equipped = None
 
 def loop():
     """Main game loop to start off with."""
-    global playerhp, gold, playerdamage
+    global playerhp, gold, playerdamage, player_inventory, equipped
     
-    user_input = input(f"You are in town.\n Current HP: {playerhp}, Current Gold: {gold}\nWhat would you like to do?\n1) Leave town (Fight Monster)\n2) Sleep (Restore HP for 5 gold)\n3) Quit")
+    user_input = input(f"You are in town.\n Current HP: {playerhp}, Current Gold: {gold}\nWhat would you like to do?\n1) Leave town (Fight Monster)\n2) Sleep (Restore HP for 5 gold)\n3) Go to the Store\n4) View Inventory\n5) Quit")
 
     if user_input == "1":
-        playerhp, gold = gamefunctions.battle(playerhp, gold, playerdamage)
+        playerhp, gold, equipped = gamefunctions.battle(playerhp, gold, playerdamage, player_inventory, equipped)
 
     if user_input == "2":
         print(f"You sleep at the local tavern. \n-5 Gold")
@@ -20,6 +24,14 @@ def loop():
         loop()
 
     if user_input == "3":
+        gold = gamefunctions.shoploop(gold, player_inventory)
+        print("Gold now:", gold)
+        print("Inventory:", player_inventory)
+
+    if user_input == "4":
+        gamefunctions.printinv(player_inventory)
+
+    if user_input == "5":
         print(f"Thank you for playing, have a good day.")
 
     else:
